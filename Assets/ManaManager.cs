@@ -7,12 +7,19 @@ public class ManaManager : MonoBehaviour
 {
     public float maxMana;
     public float RegenSpeed;
-    public float Cost;
+    public float Cost = 0;
 
     public Slider ManaSlider;
     public Slider CostManabarSlider;
 
+    public Image ManaImage;
+
+    public Color ManaColor;
+    public Color NotEnoughManaColor;
+
     public float CurrMana;
+
+    public bool DisplayMana;
 
     private void Start()
     {
@@ -27,6 +34,11 @@ public class ManaManager : MonoBehaviour
         CurrMana -= Amount;
     }
 
+    public void UpdateCost(float Amount)
+    {
+        Cost = Amount;
+    }
+
     private void Update()
     {
         if (CurrMana < maxMana)
@@ -37,8 +49,16 @@ public class ManaManager : MonoBehaviour
                 CurrMana = maxMana;
             }
         }
-        ManaSlider.value = CurrMana;
+        if(CurrMana < Cost)
+        {
+            ManaImage.color = NotEnoughManaColor;
+        }
+        else 
+        {
+            ManaImage.color = ManaColor;
+        }
 
-        CostManabarSlider.value = ManaSlider.value - Cost;
+        ManaSlider.value = CurrMana;
+        CostManabarSlider.value = CurrMana - Cost;
     }
 }
