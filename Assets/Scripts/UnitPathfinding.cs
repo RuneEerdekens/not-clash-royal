@@ -7,23 +7,25 @@ public class UnitPathfinding : MonoBehaviour
 {
 
     public NavMeshAgent agent;
-    public Transform Target;
-    public float AttackRange;
-    public UnitAttack AttackScript;
+    private Transform Target;
 
-    [SerializeField]
     private bool isAttacking = false;
 
     public bool isRanged;
+    public bool isHitscan;
 
     private int Team;
 
+    public float AttackRange;
     public float sightRange;
+
     private Collider[] hits;
     private LayerMask OtherTeamLayer;
     private int OtherTeamInt;
     private float closestDistance;
     private GameObject ClosestObj;
+
+    public UnitAttack AttackScript;
     public HealthScript HealthScript;
     // Start is called before the first frame update
 
@@ -64,7 +66,14 @@ public class UnitPathfinding : MonoBehaviour
             if(Vector3.Distance(transform.position, ClosestObj.transform.position) <= AttackRange && !isAttacking)
             {
                 isAttacking = true;
-                AttackScript.StartAttack(ClosestObj, OtherTeamInt);
+                if (isHitscan)
+                {
+                    AttackScript.StartAttackScan(ClosestObj);
+                }
+                else
+                {
+                    AttackScript.StartAttackProj(ClosestObj, OtherTeamInt);
+                }
             }
 
             if(Vector3.Distance(transform.position, ClosestObj.transform.position) > AttackRange && isAttacking)

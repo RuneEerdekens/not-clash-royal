@@ -5,9 +5,12 @@ using UnityEngine;
 public class UnitAttack : MonoBehaviour
 {
     private GameObject Target;
+    public float Damage;
+    public Transform projectileOrRendSpawn;
+    [HideInInspector]
     public bool Attacking = false;
     private bool isRanged;
-    public GameObject projectile;
+    public GameObject projectileOrRend;
     public float AttackSpeed;
     private int OtherTeamMask;
     public Animation Anim;
@@ -18,28 +21,30 @@ public class UnitAttack : MonoBehaviour
         isRanged = GetComponent<UnitPathfinding>().isRanged;
     }
 
-    public void StartAttack(GameObject closetObj, int MaskNum)
+    public void StartAttackProj(GameObject closetObj, int MaskNum)
     {
         Target = closetObj;
         OtherTeamMask = MaskNum;
         Attacking = true;
-        InvokeRepeating("Attack", AttackSpeed, AttackSpeed);
+        InvokeRepeating("AttackProj", AttackSpeed, AttackSpeed);
     }
 
     public void StopAttack()
     {
         Attacking = false;
+        CancelInvoke();
     }
 
-    private void Attack()
+    private void AttackProj()
     {
         Anim.Play();
         if (isRanged)
         {
-            GameObject tempObj = Instantiate(projectile, transform.position, Quaternion.identity);
+            GameObject tempObj = Instantiate(projectileOrRend, projectileOrRendSpawn.position, Quaternion.identity);
             tempObj.GetComponent<RangedProjectile>().Obj = Target;
             tempObj.GetComponent<RangedProjectile>().EnemieTeam = OtherTeamMask;
-            tempObj.layer = gameObject.layer;
+            tempObj.GetComponent<RangedProjectile>().Damage = Damage;
+            tempObj.layer = gameObject.layer +2;
             if (!Attacking)
             {
                 Destroy(tempObj);
@@ -50,5 +55,21 @@ public class UnitAttack : MonoBehaviour
         {
             CancelInvoke();
         }
+    }
+
+    public void StartAttackScan(GameObject closestObj)
+    {
+        Target = closestObj;
+        Attacking = true;
+        InvokeRepeating("AttackScan", AttackSpeed, AttackSpeed);
+    }
+
+    private void AttackScan()
+    {
+        Target.GetComponent<HealthScript>().TakeDamage(Damage);
+        GameObject tmpObj = Instantiate(projectileOrRend, transform.position, Quaternion.identity);
+        Vector3[] points = { projectileOrRendSpawn.position, Target.transform.position };
+        tmpObj.GetComponent<LineRenderer>().SetPositions(points);
+        Destroy(tmpObj, 0.5f);
     }
 }

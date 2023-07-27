@@ -10,6 +10,7 @@ public class RangedProjectile : MonoBehaviour
     [HideInInspector]
     public int EnemieTeam;
 
+    [HideInInspector]
     public float Damage;
 
 

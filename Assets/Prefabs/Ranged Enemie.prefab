@@ -393,12 +393,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 5897892420907515733}
-  Target: {fileID: 0}
-  AttackRange: 10
-  AttackScript: {fileID: 5897892420907515743}
-  isAttacking: 0
   isRanged: 1
+  isHitscan: 0
+  AttackRange: 10
   sightRange: 200
+  AttackScript: {fileID: 5897892420907515743}
   HealthScript: {fileID: 5346208318219222630}
 --- !u!114 &5897892420907515743
 MonoBehaviour:
@@ -412,8 +411,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb48f8074cc50e4682c73d58f8032bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 20
+  projectileOrRendSpawn: {fileID: 5897892420907515736}
   Attacking: 0
-  projectile: {fileID: 5961371784289558747, guid: 62425bedc6277944ba385cfa2c813fb1,
+  projectileOrRend: {fileID: 5961371784289558747, guid: 62425bedc6277944ba385cfa2c813fb1,
     type: 3}
   AttackSpeed: 2
   Anim: {fileID: 5897892420907515742}
