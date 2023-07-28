@@ -1156,6 +1156,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5897892420907515743, guid: c9b411c23f5760042b4c66ed8203d6c8,
+        type: 3}
+      propertyPath: projectileOrRend
+      value: 
+      objectReference: {fileID: 5961371784289558747, guid: 62425bedc6277944ba385cfa2c813fb1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9b411c23f5760042b4c66ed8203d6c8, type: 3}
 --- !u!1 &1023548133
@@ -1955,6 +1961,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 648946877039791354, guid: 1fd8058cd22819b43b68601a25c31779,
+        type: 3}
+      propertyPath: Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 648946877039791354, guid: 1fd8058cd22819b43b68601a25c31779,
+        type: 3}
+      propertyPath: attackSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7179348619688362632, guid: 1fd8058cd22819b43b68601a25c31779,
         type: 3}
       propertyPath: m_Name
@@ -2028,7 +2044,7 @@ PrefabInstance:
     - target: {fileID: 9220135011847227698, guid: 1fd8058cd22819b43b68601a25c31779,
         type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fd8058cd22819b43b68601a25c31779, type: 3}
