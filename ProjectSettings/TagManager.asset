@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - nonTarget
+  - Placable
+  - noDisplay
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - Placeable
   - Team1Proj
   - Team2Proj
-  - 
+  - Select
   - 
   - 
   - 

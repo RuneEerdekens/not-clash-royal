@@ -15,3 +15,4 @@ MonoBehaviour:
   ObjectHull: {fileID: 5479467402170895930, guid: c29df50757a7f8b4299d4927bbaca727,
     type: 3}
   Object: {fileID: 7179348619688362632, guid: 1fd8058cd22819b43b68601a25c31779, type: 3}
+  Cost: 10
