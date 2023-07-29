@@ -7,15 +7,15 @@ using Photon.Realtime;
 public class DisableNotLocal : MonoBehaviourPunCallbacks
 {
     public GameObject[] objList;
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    public void FixedUpdate()
     {
-        base.OnPlayerEnteredRoom(newPlayer);
         if (!photonView.IsMine)
         {
             foreach (GameObject obj in objList)
             {
                 obj.SetActive(false);
             }
+            enabled = false;
         }
     }
 }
