@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 
-public class PlaceUnit : MonoBehaviour
+public class PlaceUnit : MonoBehaviourPunCallbacks
 {
 
     public InputActionProperty rightTriggerAction;
@@ -28,9 +29,10 @@ public class PlaceUnit : MonoBehaviour
     private GameObject SelectedObj;
     private MeshRenderer selectedMesh;
 
+    public PhotonView view;
+
     private GameObject Hull;
 
-    // Start is called before the first frame update
     void Start()
     {
         rightTriggerAction.action.performed += spawnUnity;
@@ -41,7 +43,7 @@ public class PlaceUnit : MonoBehaviour
         if(Physics.Raycast(RightController.transform.position, RightController.transform.forward, out hit, 1000f) && ManaMangerScript.CurrMana > obj.Cost)
         {
             if(hit.collider.tag == "Placable"){
-                GameObject tmp = Instantiate(Unit, hit.point + new Vector3(0, Unit.transform.localScale.y / 2, 0), Quaternion.identity);
+                GameObject tmp = PhotonNetwork.Instantiate(Unit.name, hit.point + new Vector3(0, Unit.transform.localScale.y / 2, 0), Quaternion.identity);
                 tmp.GetComponent<HealthScript>().Team = MyTeam;
                 tmp.layer = gameObject.layer;
                 ManaMangerScript.RemoveMana(obj.Cost);
@@ -49,8 +51,19 @@ public class PlaceUnit : MonoBehaviour
         }
     }
 
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        if (!view.IsMine) 
+        { 
+            this.enabled = false; 
+            ManaMangerScript.enabled = false; 
+        }
+    }
+
     private void FixedUpdate()
     {
+        if (!SelectedObj) { return;  }
         if(Physics.Raycast(RightController.transform.position, RightController.transform.forward, out hit2))
         {
             if(hit2.collider.tag != "noDisplay")
