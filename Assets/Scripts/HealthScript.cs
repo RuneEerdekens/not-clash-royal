@@ -44,9 +44,11 @@ public class HealthScript : MonoBehaviour
         currentHealth -= Amount;
         Healthbar.value = currentHealth;
         Healthbar.fillRect.gameObject.GetComponent<Image>().color = HealthGradient.Evaluate(currentHealth / maxHealth);
+
+
         if(currentHealth <= 0)
         {
-            Destroy(Instantiate(DeathEffect, transform.position, Quaternion.identity), 5f);
+            Destroy(Instantiate(DeathEffect, transform.position, Quaternion.identity), 5f); //
             Destroy(gameObject); //dont use delay here or shit breaks
         }
     }

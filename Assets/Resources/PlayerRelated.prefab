@@ -238,8 +238,8 @@ MonoBehaviour:
   - {fileID: 5746452062079482696}
   - {fileID: 5746452061814772121}
   - {fileID: 5746452061446747027}
-  - {fileID: 5746452062407042489}
-  - {fileID: 5746452062552298874}
+  scripts: []
+  view: {fileID: 5746452060888625863}
 --- !u!1 &5746452060929616904
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,6 +955,7 @@ GameObject:
   - component: {fileID: 5746452061488088010}
   - component: {fileID: 5746452061488088009}
   - component: {fileID: 5746452061488088008}
+  - component: {fileID: 3393704615849068308}
   m_Layer: 0
   m_Name: Cube
   m_TagString: nonTarget
@@ -1027,6 +1028,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3393704615849068308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746452061488088013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &5746452061566693575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,6 +1131,7 @@ GameObject:
   - component: {fileID: 5746452061753328945}
   - component: {fileID: 5746452061753328956}
   - component: {fileID: 5746452061753328959}
+  - component: {fileID: 7091717987093117372}
   m_Layer: 0
   m_Name: Cube
   m_TagString: nonTarget
@@ -1186,6 +1204,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7091717987093117372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746452061753328944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &5746452061814772121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,6 +1561,7 @@ GameObject:
   - component: {fileID: 5746452062407042469}
   - component: {fileID: 5746452062407042468}
   - component: {fileID: 5746452062407042471}
+  - component: {fileID: 4815755565365808178}
   m_Layer: 0
   m_Name: LeftHand Controller
   m_TagString: nonTarget
@@ -2099,6 +2134,24 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
+--- !u!114 &4815755565365808178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746452062407042489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 699e9c40b82af7642b45f49b5b2bdc52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objList: []
+  scripts:
+  - {fileID: 5746452062407042467}
+  - {fileID: 5746452062407042466}
+  - {fileID: 5746452062407042468}
+  view: {fileID: 5746452060888625863}
 --- !u!1 &5746452062410174992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2203,6 +2256,7 @@ GameObject:
   - component: {fileID: 5746452062552298854}
   - component: {fileID: 5746452062552298873}
   - component: {fileID: 5746452062552298872}
+  - component: {fileID: 9145323905383566113}
   m_Layer: 0
   m_Name: RightHand Controller
   m_TagString: nonTarget
@@ -2775,6 +2829,24 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
+--- !u!114 &9145323905383566113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746452062552298874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 699e9c40b82af7642b45f49b5b2bdc52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objList: []
+  scripts:
+  - {fileID: 5746452062552298852}
+  - {fileID: 5746452062552298855}
+  - {fileID: 5746452062552298873}
+  view: {fileID: 5746452060888625863}
 --- !u!1 &5746452062596459988
 GameObject:
   m_ObjectHideFlags: 0
