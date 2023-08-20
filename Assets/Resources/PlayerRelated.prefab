@@ -219,6 +219,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 1270559774903764364}
   - {fileID: 4383817608960663466}
   - {fileID: 5602384121532083826}
   - {fileID: 7091717987093117372}
@@ -241,6 +242,9 @@ MonoBehaviour:
   objList:
   - {fileID: 5746452061814772121}
   - {fileID: 5746452061446747027}
+  objList2:
+  - {fileID: 5746452062407042489}
+  - {fileID: 5746452062552298874}
   scripts: []
   view: {fileID: 5746452060888625863}
 --- !u!1 &5746452060929616904
@@ -1476,6 +1480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objList: []
+  objList2: []
   scripts:
   - {fileID: 5746452062079482677}
   - {fileID: 5746452062079482676}
@@ -1609,7 +1614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5746452062407042470
 Transform:
   m_ObjectHideFlags: 0
@@ -2197,6 +2202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objList: []
+  objList2: []
   scripts:
   - {fileID: 5746452062407042467}
   - {fileID: 5746452062407042466}
@@ -2330,7 +2336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5746452062552298875
 Transform:
   m_ObjectHideFlags: 0
@@ -2918,6 +2924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objList: []
+  objList2: []
   scripts:
   - {fileID: 5746452062552298852}
   - {fileID: 5746452062552298855}

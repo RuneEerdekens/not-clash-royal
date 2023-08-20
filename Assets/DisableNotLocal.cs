@@ -8,6 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class DisableNotLocal : MonoBehaviourPunCallbacks
 {
     public GameObject[] objList;
+    public GameObject[] objList2;
 
     public List<MonoBehaviour> scripts;
 
@@ -25,6 +26,12 @@ public class DisableNotLocal : MonoBehaviourPunCallbacks
             {
                 script.enabled = false;
             }
+
+            foreach (GameObject obj in objList2)
+            {
+                obj.SetActive(true);
+            }
+
             enabled = false;
         }
     }
