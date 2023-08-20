@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb48f8074cc50e4682c73d58f8032bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 20
+  Damage: 0
   projectileOrRendSpawn: {fileID: 5897892420907515736}
   Attacking: 0
   projectileOrRend: {fileID: 5961371784289558747, guid: 62425bedc6277944ba385cfa2c813fb1,
@@ -521,7 +521,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -3840416870923611993}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
