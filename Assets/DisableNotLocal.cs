@@ -27,12 +27,15 @@ public class DisableNotLocal : MonoBehaviourPunCallbacks
                 script.enabled = false;
             }
 
+            enabled = false;
+        }
+
+        if (view.IsMine)
+        {
             foreach (GameObject obj in objList2)
             {
                 obj.SetActive(true);
             }
-
-            enabled = false;
         }
     }
 }
