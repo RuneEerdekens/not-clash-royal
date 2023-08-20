@@ -6,6 +6,6 @@ public class TrackCam : MonoBehaviour
 {
     private void FixedUpdate()
     {
-        transform.LookAt(Camera.current.transform.position);
+        transform.LookAt(Camera.main.transform.position);
     }
 }
