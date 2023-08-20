@@ -237,7 +237,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objList:
-  - {fileID: 5746452062079482696}
   - {fileID: 5746452061814772121}
   - {fileID: 5746452061446747027}
   scripts: []
