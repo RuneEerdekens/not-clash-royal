@@ -14,14 +14,11 @@ public class UnitPathfinding : MonoBehaviour
     public bool isRanged;
     public bool isHitscan;
 
-    private int Team;
-
     public float AttackRange;
     public float sightRange;
 
     private Collider[] hits;
-    private LayerMask OtherTeamLayer;
-    private int OtherTeamInt;
+    private string OtherTeamTag;
     private float closestDistance;
     private GameObject ClosestObj;
 
@@ -34,12 +31,16 @@ public class UnitPathfinding : MonoBehaviour
     {
         closestDistance = sightRange;
 
-        agent.stoppingDistance = AttackRange; 
+        agent.stoppingDistance = AttackRange;
 
-        Team = HealthScript.Team;
-        OtherTeamLayer = HealthScript.OtherTeamLayer;
-        OtherTeamInt = HealthScript.OtherTeamInt;
-
+        if(tag == "Team1")
+        {
+            OtherTeamTag = "Team2";
+        }
+        else if(tag == "Team2")
+        {
+            OtherTeamTag = "Team1";
+        }
     }
 
     // Update is called once per frame
@@ -47,14 +48,17 @@ public class UnitPathfinding : MonoBehaviour
     {
         if (!isAttacking || !Target)   
         {
-            hits = Physics.OverlapSphere(transform.position, closestDistance, OtherTeamLayer);
+            hits = Physics.OverlapSphere(transform.position, closestDistance);
             foreach (Collider hit in hits)
             {
-                float d = Vector3.Distance(transform.position, hit.transform.position);
-                if (d < closestDistance)
+                if (hit.tag == OtherTeamTag)
                 {
-                    ClosestObj = hit.gameObject;
-                    closestDistance = d;
+                    float d = Vector3.Distance(transform.position, hit.transform.position);
+                    if (d < closestDistance)
+                    {
+                        ClosestObj = hit.gameObject;
+                        closestDistance = d;
+                    }
                 }
             }
             if (ClosestObj) { closestDistance = Vector3.Distance(transform.position, ClosestObj.transform.position); }
@@ -72,7 +76,7 @@ public class UnitPathfinding : MonoBehaviour
                 }
                 else
                 {
-                    AttackScript.StartAttackProj(ClosestObj, OtherTeamInt);
+                    AttackScript.StartAttackProj(ClosestObj, OtherTeamTag);
                 }
             }
 

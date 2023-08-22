@@ -8,11 +8,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class DisableNotLocal : MonoBehaviourPunCallbacks
 {
     public GameObject[] objList;
-    public GameObject[] objList2;
 
     public List<MonoBehaviour> scripts;
 
     public PhotonView view;
+
+    public GameObject player;
 
     public void FixedUpdate()
     {
@@ -29,13 +30,9 @@ public class DisableNotLocal : MonoBehaviourPunCallbacks
 
             enabled = false;
         }
-
-        if (view.IsMine)
+        if (view.IsMine && player)
         {
-            foreach (GameObject obj in objList2)
-            {
-                obj.SetActive(true);
-            }
+            player.SetActive(true);
         }
     }
 }

@@ -12,19 +12,23 @@ public class UnitAttack : MonoBehaviour
     private bool isRanged;
     public GameObject projectileOrRend;
     public float AttackSpeed;
-    private int OtherTeamMask;
+    private string OtherTeamTag;
     public Animation Anim;
 
 
     private void Awake()
     {
-        isRanged = GetComponent<UnitPathfinding>().isRanged;
+
+        if(TryGetComponent<UnitPathfinding>(out UnitPathfinding component))
+        {
+            isRanged = component.isRanged;
+        }
     }
 
-    public void StartAttackProj(GameObject closetObj, int MaskNum)
+    public void StartAttackProj(GameObject closetObj, string TagString)
     {
         Target = closetObj;
-        OtherTeamMask = MaskNum;
+        OtherTeamTag = TagString;
         Attacking = true;
         InvokeRepeating("AttackProj", AttackSpeed, AttackSpeed);
     }
@@ -42,9 +46,9 @@ public class UnitAttack : MonoBehaviour
         {
             GameObject tempObj = Instantiate(projectileOrRend, projectileOrRendSpawn.position, Quaternion.identity);
             tempObj.GetComponent<RangedProjectile>().Obj = Target;
-            tempObj.GetComponent<RangedProjectile>().EnemieTeam = OtherTeamMask;
+            tempObj.GetComponent<RangedProjectile>().EnemieTeam = OtherTeamTag;
             tempObj.GetComponent<RangedProjectile>().Damage = Damage;
-            tempObj.layer = gameObject.layer +2;
+            tempObj.tag = tag;
             if (!Attacking)
             {
                 Destroy(tempObj);

@@ -5,30 +5,29 @@ using UnityEngine;
 public class StructureRangedAttack : MonoBehaviour
 {
     public float Range;
-    public float Damage;
-    public float attackSpeed;
 
-    public Transform LazerStart;
-
-    private LayerMask OtherTeamLayer;
+    private string OtherTeamTag;
     private float ClosetsDistance;
     private Collider[] hits;
     private GameObject TargetObj;
     private bool LookingForTarget = true;
-    public GameObject lineRend;
     private bool canAttack = true;
-    
+
+    public UnitAttack AttackScript;
+
+
 
     private void Start()
     {
         ClosetsDistance = Range + 1;
-        if (gameObject.layer == 6)
+
+        if (tag == "Team1")
         {
-            OtherTeamLayer = LayerMask.GetMask("Team2");
+            OtherTeamTag = "Team2";
         }
-        else if (gameObject.layer == 7)
+        else if(tag == "Team2")
         {
-            OtherTeamLayer = LayerMask.GetMask("Team1");
+            OtherTeamTag = "Team1";
         }
     }
 
@@ -36,10 +35,10 @@ public class StructureRangedAttack : MonoBehaviour
     {
         if (LookingForTarget || !TargetObj)
         {
-            hits = Physics.OverlapSphere(transform.position, Range, OtherTeamLayer);
+            hits = Physics.OverlapSphere(transform.position, Range);
             foreach (Collider hit in hits)
             {
-                if (!hit.CompareTag("nonTarget"))
+                if (hit.tag == OtherTeamTag)
                 {
                     float d = Vector3.Distance(transform.position, hit.transform.position);
                     if (d < ClosetsDistance)
@@ -52,12 +51,13 @@ public class StructureRangedAttack : MonoBehaviour
             if (TargetObj) { LookingForTarget = false; }
         }
         ChekTarget();
-        if (TargetObj && !LookingForTarget && canAttack) { StartCoroutine(DelayAttack());  Attack(); }
+        if (TargetObj && !LookingForTarget && canAttack) {AttackScript.StartAttackScan(TargetObj);}
+        if (LookingForTarget || !TargetObj) { AttackScript.CancelInvoke();}
     }
 
     private void ChekTarget()
     {
-        if (TargetObj )
+        if (TargetObj)
         {
             if (Vector3.Distance(transform.position, TargetObj.transform.position) > Range)
             {
@@ -71,27 +71,9 @@ public class StructureRangedAttack : MonoBehaviour
         }
     }
 
-    private void Attack()
-    {
-        if (LookingForTarget || !TargetObj) { CancelInvoke(); return; }
-            
-        TargetObj.GetComponent<HealthScript>().TakeDamage(Damage);
-        GameObject tmpObj = Instantiate(lineRend, transform.position, Quaternion.identity);
-        Vector3[] points = { LazerStart.position, TargetObj.transform.position };
-        tmpObj.GetComponent<LineRenderer>().SetPositions(points);
-        Destroy(tmpObj, 0.5f);
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(255, 255, 0);
         Gizmos.DrawWireSphere(transform.position, Range);
-    }
-
-    private IEnumerator DelayAttack()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(attackSpeed);
-        canAttack = true;
     }
 }

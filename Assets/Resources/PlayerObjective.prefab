@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 395004826125861036}
   - component: {fileID: 395004826125861037}
   - component: {fileID: 8314000123456415278}
+  - component: {fileID: 8084619445166999218}
   m_Layer: 0
   m_Name: PlayerObjective
   m_TagString: Untagged
@@ -286,7 +287,6 @@ MonoBehaviour:
     type: 3}
   maxHealth: 200
   currentHealth: 0
-  Team: 0
   HealthGradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
@@ -317,10 +317,6 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   Healthbar: {fileID: 1814109192212291641}
-  OtherTeamLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  OtherTeamInt: 0
 --- !u!114 &395004826125861037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +351,18 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8084619445166999218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814109191257754390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39aa889e1f314442b9cab5c2aa403dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1814109191862161158
 GameObject:
   m_ObjectHideFlags: 0

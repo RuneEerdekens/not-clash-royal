@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7179348619343530043}
   - component: {fileID: 7179348619343530045}
   - component: {fileID: 7179348619343530042}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,9 @@ GameObject:
   - component: {fileID: 648946877039791354}
   - component: {fileID: -8067181202043743764}
   - component: {fileID: 2261219365805555105}
-  m_Layer: 6
+  - component: {fileID: -7802111731978691021}
+  - component: {fileID: 3608190140946087372}
+  m_Layer: 0
   m_Name: Structure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +214,6 @@ MonoBehaviour:
     type: 3}
   maxHealth: 100
   currentHealth: 0
-  Team: 0
   HealthGradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
@@ -243,10 +244,6 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   Healthbar: {fileID: 7179348620877130151}
-  OtherTeamLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  OtherTeamInt: 0
 --- !u!114 &648946877039791354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,11 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 20
-  Damage: 10
-  attackSpeed: 2
-  LazerStart: {fileID: 3482660594530306744}
-  lineRend: {fileID: 5076649837604194269, guid: d95770bf41c14f344b0a37a99066b612,
-    type: 3}
+  AttackScript: {fileID: 3608190140946087372}
 --- !u!114 &-8067181202043743764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +297,37 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-7802111731978691021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7179348619688362632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39aa889e1f314442b9cab5c2aa403dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3608190140946087372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7179348619688362632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb48f8074cc50e4682c73d58f8032bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 10
+  projectileOrRendSpawn: {fileID: 3482660594530306744}
+  Attacking: 0
+  projectileOrRend: {fileID: 5076649837604194269, guid: d95770bf41c14f344b0a37a99066b612,
+    type: 3}
+  AttackSpeed: 2
+  Anim: {fileID: 0}
 --- !u!1 &7179348619798566451
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +339,7 @@ GameObject:
   - component: {fileID: 7179348619798566450}
   - component: {fileID: 7179348619798566452}
   - component: {fileID: 7179348619798566453}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: FIll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +417,7 @@ GameObject:
   - component: {fileID: 7179348620291917469}
   - component: {fileID: 7179348620291917466}
   - component: {fileID: 1899266465107595607}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7179348620877130150}
   - component: {fileID: 7179348620877130151}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

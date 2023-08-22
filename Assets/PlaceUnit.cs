@@ -8,6 +8,7 @@ public class PlaceUnit : MonoBehaviourPunCallbacks
 {
 
     public InputActionProperty rightTriggerAction;
+    public InputDevice device;
     public Material PlaceableMat;
     public Material notPlaceableMat;
     public Material HologramMat;
@@ -22,8 +23,6 @@ public class PlaceUnit : MonoBehaviourPunCallbacks
     private RaycastHit hit;
     private RaycastHit hit2;
 
-    public int MyTeam;
-
     private GameObject Unit;
 
     private GameObject SelectedObj;
@@ -32,6 +31,7 @@ public class PlaceUnit : MonoBehaviourPunCallbacks
     public PhotonView view;
 
     private GameObject Hull;
+
 
     void Start()
     {
@@ -44,20 +44,8 @@ public class PlaceUnit : MonoBehaviourPunCallbacks
         {
             if(hit.collider.tag == "Placable"){
                 GameObject tmp = PhotonNetwork.Instantiate(Unit.name, hit.point + new Vector3(0, Unit.transform.localScale.y / 2, 0), Quaternion.identity);
-                tmp.GetComponent<HealthScript>().Team = MyTeam;
-                tmp.layer = gameObject.layer;
                 ManaMangerScript.RemoveMana(obj.Cost);
             }
-        }
-    }
-
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
-        if (!view.IsMine) 
-        { 
-            this.enabled = false; 
-            ManaMangerScript.enabled = false; 
         }
     }
 
@@ -76,6 +64,8 @@ public class PlaceUnit : MonoBehaviourPunCallbacks
             }
 
             
+
+
             if (hit2.collider.tag == "Placable")
             {
                 if(ManaMangerScript.CurrMana >= obj.Cost && selectedMesh.material != PlaceableMat)
@@ -100,6 +90,7 @@ public class PlaceUnit : MonoBehaviourPunCallbacks
             }
             SelectedObj.transform.position = HologramPoint.position;
         }
+
         if (Physics.Raycast(RightController.transform.position, RightController.transform.forward, out hit2,1000f))
         {
             if(hit2.collider.tag == "Placable")

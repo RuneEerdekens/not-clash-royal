@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5823752419927909058}
   - component: {fileID: 3651610519896939825}
   - component: {fileID: 8711289921307663403}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: FIll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 8932024923783044477}
   - component: {fileID: 3661372434597096278}
   - component: {fileID: 5067547326754425651}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 511666627057210343}
   - component: {fileID: 320487663226729886}
   - component: {fileID: 3182303933492134773}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,8 @@ GameObject:
   - component: {fileID: 5897892420907515742}
   - component: {fileID: -3840416870923611993}
   - component: {fileID: 6520979984872149513}
-  m_Layer: 7
+  - component: {fileID: -388693521615188716}
+  m_Layer: 0
   m_Name: Ranged Enemie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +437,6 @@ MonoBehaviour:
     type: 3}
   maxHealth: 100
   currentHealth: 0
-  Team: 0
   HealthGradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
@@ -467,10 +467,6 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   Healthbar: {fileID: 320487663226729886}
-  OtherTeamLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  OtherTeamInt: 0
 --- !u!111 &5897892420907515742
 Animation:
   m_ObjectHideFlags: 0
@@ -526,6 +522,18 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-388693521615188716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897892420907515735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39aa889e1f314442b9cab5c2aa403dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6563707271543700971
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +546,7 @@ GameObject:
   - component: {fileID: 4489762421199390949}
   - component: {fileID: 6887814653247485633}
   - component: {fileID: 6752237887074862118}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

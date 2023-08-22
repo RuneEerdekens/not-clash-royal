@@ -6,7 +6,7 @@ public class ObjectiveScript : MonoBehaviour
 {
     private void OnDestroy()
     {
-        Debug.Log(LayerMask.LayerToName(gameObject.layer) + " lost");
+        Debug.Log(tag + " lost");
         //load victory screen
     }
 }

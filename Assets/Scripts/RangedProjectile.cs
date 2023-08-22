@@ -8,7 +8,7 @@ public class RangedProjectile : MonoBehaviour
     public Rigidbody rb;
     public float speed;
     [HideInInspector]
-    public int EnemieTeam;
+    public string EnemieTeam;
 
     [HideInInspector]
     public float Damage;
@@ -34,7 +34,7 @@ public class RangedProjectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.layer == EnemieTeam && !other.CompareTag("nonTarget"))
+        if (other.gameObject.tag == EnemieTeam && !other.CompareTag("nonTarget"))
         {
             Destroy(gameObject);
             other.gameObject.GetComponent<HealthScript>().TakeDamage(Damage);
