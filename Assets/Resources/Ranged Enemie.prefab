@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 5897892420907515742}
   - component: {fileID: -3840416870923611993}
   - component: {fileID: 6520979984872149513}
-  - component: {fileID: -388693521615188716}
+  - component: {fileID: 5833862496835078170}
   m_Layer: 0
   m_Name: Ranged Enemie
   m_TagString: Untagged
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb48f8074cc50e4682c73d58f8032bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
+  Damage: 10
   projectileOrRendSpawn: {fileID: 5897892420907515736}
   Attacking: 0
   projectileOrRend: {fileID: 5961371784289558747, guid: 62425bedc6277944ba385cfa2c813fb1,
@@ -522,7 +522,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-388693521615188716
+--- !u!114 &5833862496835078170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

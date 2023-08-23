@@ -44,10 +44,12 @@ public class PlaceUnit : MonoBehaviourPunCallbacks
         {
             if(hit.collider.tag == "Placable"){
                 GameObject tmp = PhotonNetwork.Instantiate(Unit.name, hit.point + new Vector3(0, Unit.transform.localScale.y / 2, 0), Quaternion.identity);
+                tmp.GetComponent<PhotonView>().RPC("SetTeamTag", RpcTarget.AllBuffered, tag); // set tag of new object to right team
                 ManaMangerScript.RemoveMana(obj.Cost);
             }
         }
     }
+
 
     private void FixedUpdate()
     {

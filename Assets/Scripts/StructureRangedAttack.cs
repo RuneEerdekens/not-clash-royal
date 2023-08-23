@@ -11,7 +11,6 @@ public class StructureRangedAttack : MonoBehaviour
     private Collider[] hits;
     private GameObject TargetObj;
     private bool LookingForTarget = true;
-    private bool canAttack = true;
 
     public UnitAttack AttackScript;
 
@@ -51,23 +50,28 @@ public class StructureRangedAttack : MonoBehaviour
             if (TargetObj) { LookingForTarget = false; }
         }
         ChekTarget();
-        if (TargetObj && !LookingForTarget && canAttack) {AttackScript.StartAttackScan(TargetObj);}
-        if (LookingForTarget || !TargetObj) { AttackScript.CancelInvoke();}
+
+        if (TargetObj && !LookingForTarget && !AttackScript.Attacking) {AttackScript.StartAttackScan(TargetObj);}
+        if (LookingForTarget || !TargetObj) { AttackScript.CancelInvoke(); }
     }
 
     private void ChekTarget()
     {
         if (TargetObj)
         {
-            if (Vector3.Distance(transform.position, TargetObj.transform.position) > Range)
+            if (Vector3.Distance(transform.position, TargetObj.transform.position) > Range) // target out of range
             {
                 TargetObj = null;
                 LookingForTarget = true;
+                AttackScript.CancelInvoke();
+                AttackScript.Attacking = false;
             }
         }
-        if(!TargetObj && !LookingForTarget)
+        if(!TargetObj && !LookingForTarget) // target died
         {
             LookingForTarget = true;
+            AttackScript.CancelInvoke();
+            AttackScript.Attacking = false;
         }
     }
 

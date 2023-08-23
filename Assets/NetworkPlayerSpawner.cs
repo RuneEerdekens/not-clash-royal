@@ -18,13 +18,23 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.Instantiate(PlayerInfo.name, SpawnP1.position, SpawnP1.rotation);
-            PhotonNetwork.Instantiate(Objective.name, SpawnP1.position + new Vector3(0, 0.5f, -3), SpawnP1.rotation);
+            PlayerPrefab = PhotonNetwork.Instantiate(PlayerInfo.name, SpawnP1.position, SpawnP1.rotation);
+            GameObject Player = PlayerPrefab.transform.GetChild(0).gameObject;
+            view = Player.GetComponent<PhotonView>();
+            view.RPC("SetTeamTag", RpcTarget.AllBuffered, "Team1");
+            GameObject objectiveObj = PhotonNetwork.Instantiate(Objective.name, SpawnP1.position + new Vector3(0, 0.5f, -3), SpawnP1.rotation);
+            view = objectiveObj.GetComponent<PhotonView>();
+            view.RPC("SetTeamTag", RpcTarget.AllBuffered, "Team1");
         }
         else
         {
-            PhotonNetwork.Instantiate(PlayerInfo.name, SpawnP2.position, SpawnP2.rotation);
-            PhotonNetwork.Instantiate(Objective.name, SpawnP2.position + new Vector3(0, 0.5f, 3), SpawnP1.rotation);
+            PlayerPrefab = PhotonNetwork.Instantiate(PlayerInfo.name, SpawnP2.position, SpawnP2.rotation);
+            GameObject Player = PlayerPrefab.transform.GetChild(0).gameObject;
+            view = Player.GetComponent<PhotonView>();
+            view.RPC("SetTeamTag", RpcTarget.AllBuffered, "Team2");
+            GameObject objectiveObj = PhotonNetwork.Instantiate(Objective.name, SpawnP2.position + new Vector3(0, 0.5f, 3), SpawnP1.rotation);
+            view = objectiveObj.GetComponent<PhotonView>();
+            view.RPC("SetTeamTag", RpcTarget.AllBuffered, "Team2");
         }
        
     }
