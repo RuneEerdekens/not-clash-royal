@@ -43,14 +43,16 @@ public class RangedProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.gameObject.CompareTag(EnemieTeam) && view.IsMine)
+        if (view.IsMine) 
         {
-            PhotonNetwork.Destroy(gameObject);
-            TargetView = other.gameObject.GetComponent<PhotonView>();
+            if (other.gameObject.CompareTag(EnemieTeam))
+            {
+                PhotonNetwork.Destroy(gameObject);
+                TargetView = other.gameObject.GetComponent<PhotonView>();
 
-            TargetView.RPC("TakeDamage", TargetView.Controller, Damage);
-            //animation
+                TargetView.RPC("TakeDamage", TargetView.Controller, Damage);
+                //animation
+            }
         }
     }
 
