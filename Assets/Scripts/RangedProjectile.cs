@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class RangedProjectile : MonoBehaviour
 {
     public GameObject Obj;
     public Rigidbody rb;
+    public float lifetime;
     public float speed;
     [HideInInspector]
     public string EnemieTeam;
@@ -13,16 +15,24 @@ public class RangedProjectile : MonoBehaviour
     [HideInInspector]
     public float Damage;
 
+    private PhotonView view;
+    private PhotonView TargetView;
+
 
 
     private void Awake()
     {
-        Destroy(gameObject, 10);
+        view = GetComponent<PhotonView>();
+        if (view.IsMine)
+        {
+            print("we got here");
+            Invoke("SelfDestruct", lifetime);
+        }
     }
 
     private void FixedUpdate()
     {
-        if (Obj)
+        if (Obj && view.IsMine)
         {
             transform.LookAt(Obj.transform.position);
             transform.Rotate(90, 0, 0);
@@ -34,11 +44,18 @@ public class RangedProjectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.tag == EnemieTeam && !other.CompareTag("nonTarget"))
+        if (other.gameObject.CompareTag(EnemieTeam) && view.IsMine)
         {
-            Destroy(gameObject);
-            other.gameObject.GetComponent<HealthScript>().TakeDamage(Damage);
+            PhotonNetwork.Destroy(gameObject);
+            TargetView = other.gameObject.GetComponent<PhotonView>();
+
+            TargetView.RPC("TakeDamage", TargetView.Controller, Damage);
             //animation
         }
+    }
+
+    private void SelfDestruct()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7179348619343530043}
   - component: {fileID: 7179348619343530045}
   - component: {fileID: 7179348619343530042}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2261219365805555105}
   - component: {fileID: 3608190140946087372}
   - component: {fileID: -4527588297803884622}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Structure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,6 +257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 20
+  Targetable:
+    serializedVersion: 2
+    m_Bits: 128
   AttackScript: {fileID: 3608190140946087372}
 --- !u!114 &-8067181202043743764
 MonoBehaviour:
@@ -312,6 +315,7 @@ MonoBehaviour:
   Damage: 10
   projectileOrRendSpawn: {fileID: 3482660594530306744}
   Attacking: 0
+  isRanged: 0
   projectileOrRend: {fileID: 5076649837604194269, guid: d95770bf41c14f344b0a37a99066b612,
     type: 3}
   AttackSpeed: 2
@@ -339,7 +343,7 @@ GameObject:
   - component: {fileID: 7179348619798566450}
   - component: {fileID: 7179348619798566452}
   - component: {fileID: 7179348619798566453}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FIll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +421,7 @@ GameObject:
   - component: {fileID: 7179348620291917469}
   - component: {fileID: 7179348620291917466}
   - component: {fileID: 1899266465107595607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,7 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7179348620877130150}
   - component: {fileID: 7179348620877130151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +624,7 @@ GameObject:
   - component: {fileID: 3658134148993107121}
   - component: {fileID: 7790251785213436040}
   - component: {fileID: 8126191831768832655}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackBall?
   m_TagString: Untagged
   m_Icon: {fileID: 0}

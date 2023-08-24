@@ -1,83 +1,87 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class StructureRangedAttack : MonoBehaviour
 {
     public float Range;
 
+    private bool isAttacking = false;
     private string OtherTeamTag;
-    private float ClosetsDistance;
+    private float closestDistance;
     private Collider[] hits;
     private GameObject TargetObj;
-    private bool LookingForTarget = true;
+    public LayerMask Targetable;
 
     public UnitAttack AttackScript;
-
+    private PhotonView view;
 
 
     private void Start()
     {
-        ClosetsDistance = Range + 1;
+        closestDistance = Range + 1;
 
-        if (tag == "Team1")
+        view = GetComponent<PhotonView>();
+        if (view.IsMine)
         {
-            OtherTeamTag = "Team2";
-        }
-        else if(tag == "Team2")
-        {
-            OtherTeamTag = "Team1";
+            if (tag.Equals("Team1"))
+            {
+                OtherTeamTag = "Team2";
+            }
+            else if (tag.Equals("Team2"))
+            {
+                OtherTeamTag = "Team1";
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        if (LookingForTarget || !TargetObj)
+        if (view.IsMine)
         {
-            hits = Physics.OverlapSphere(transform.position, Range);
-            foreach (Collider hit in hits)
+            if (!TargetObj)
             {
-                if (hit.tag == OtherTeamTag)
+                TargetObj = FindTarget();
+                if (isAttacking)
                 {
-                    float d = Vector3.Distance(transform.position, hit.transform.position);
-                    if (d < ClosetsDistance)
-                    {
-                        ClosetsDistance = d;
-                        TargetObj = hit.gameObject;
-                    }
+                    isAttacking = false;
+                    AttackScript.StopAttack();
                 }
             }
-            if (TargetObj) { LookingForTarget = false; }
-        }
-        ChekTarget();
-
-        if (TargetObj && !LookingForTarget && !AttackScript.Attacking) {AttackScript.StartAttackScan(TargetObj);}
-        if (LookingForTarget || !TargetObj) { AttackScript.CancelInvoke(); }
-    }
-
-    private void ChekTarget()
-    {
-        if (TargetObj)
-        {
-            if (Vector3.Distance(transform.position, TargetObj.transform.position) > Range) // target out of range
+            if (TargetObj)
             {
-                TargetObj = null;
-                LookingForTarget = true;
-                AttackScript.CancelInvoke();
-                AttackScript.Attacking = false;
+                closestDistance = Vector3.Distance(transform.position, TargetObj.transform.position);
+                if (closestDistance > Range && isAttacking)
+                {
+                    TargetObj = null;
+                    isAttacking = false;
+                    AttackScript.StopAttack();
+                }
+                if(closestDistance <= Range && !isAttacking)
+                {
+                    isAttacking = true;
+                    AttackScript.StartAttackScan(TargetObj);
+                }
             }
         }
-        if(!TargetObj && !LookingForTarget) // target died
-        {
-            LookingForTarget = true;
-            AttackScript.CancelInvoke();
-            AttackScript.Attacking = false;
-        }
     }
 
-    private void OnDrawGizmos()
+    private GameObject FindTarget()
     {
-        Gizmos.color = new Color(255, 255, 0);
-        Gizmos.DrawWireSphere(transform.position, Range);
-    }
+        GameObject Tmp = null;
+        hits = Physics.OverlapSphere(transform.position, Range, Targetable);
+        closestDistance = Range;
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag(OtherTeamTag))
+            {
+                float d = Vector3.Distance(transform.position, hit.transform.position);
+                if (d < closestDistance)
+                {
+                    closestDistance = d;
+                    Tmp = hit.gameObject;
+                }
+            }
+        }
+        return Tmp;
+    } //returns closest valid target in sightrange or null if there are none
 }

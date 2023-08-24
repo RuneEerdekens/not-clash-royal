@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5823752419927909058}
   - component: {fileID: 3651610519896939825}
   - component: {fileID: 8711289921307663403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FIll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 8932024923783044477}
   - component: {fileID: 3661372434597096278}
   - component: {fileID: 5067547326754425651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 511666627057210343}
   - component: {fileID: 320487663226729886}
   - component: {fileID: 3182303933492134773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: -3840416870923611993}
   - component: {fileID: 6520979984872149513}
   - component: {fileID: 5833862496835078170}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ranged Enemie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,6 +396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 5897892420907515733}
+  Targetable:
+    serializedVersion: 2
+    m_Bits: 128
   isRanged: 1
   isHitscan: 0
   AttackRange: 10
@@ -417,6 +420,7 @@ MonoBehaviour:
   Damage: 10
   projectileOrRendSpawn: {fileID: 5897892420907515736}
   Attacking: 0
+  isRanged: 1
   projectileOrRend: {fileID: 5961371784289558747, guid: 62425bedc6277944ba385cfa2c813fb1,
     type: 3}
   AttackSpeed: 2
@@ -546,7 +550,7 @@ GameObject:
   - component: {fileID: 4489762421199390949}
   - component: {fileID: 6887814653247485633}
   - component: {fileID: 6752237887074862118}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

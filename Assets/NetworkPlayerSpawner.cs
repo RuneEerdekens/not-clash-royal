@@ -36,7 +36,6 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
             view = objectiveObj.GetComponent<PhotonView>();
             view.RPC("SetTeamTag", RpcTarget.AllBuffered, "Team2");
         }
-       
     }
 
     public override void OnLeftRoom()

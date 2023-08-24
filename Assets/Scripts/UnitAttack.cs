@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class UnitAttack : MonoBehaviour
 {
@@ -9,21 +10,13 @@ public class UnitAttack : MonoBehaviour
     public Transform projectileOrRendSpawn;
     [HideInInspector]
     public bool Attacking = false;
-    private bool isRanged;
+    public bool isRanged;
     public GameObject projectileOrRend;
     public float AttackSpeed;
     private string OtherTeamTag;
     public Animation Anim;
 
-
-    private void Awake()
-    {
-
-        if(TryGetComponent<UnitPathfinding>(out UnitPathfinding component))
-        {
-            isRanged = component.isRanged;
-        }
-    }
+    private PhotonView TargetView;
 
     public void StartAttackProj(GameObject closetObj, string TagString)
     {
@@ -40,18 +33,19 @@ public class UnitAttack : MonoBehaviour
     }
 
     private void AttackProj()
-    {
+    {   
         Anim.Play();
         if (isRanged)
         {
-            GameObject tempObj = Instantiate(projectileOrRend, projectileOrRendSpawn.position, Quaternion.identity);
+            GameObject tempObj = PhotonNetwork.Instantiate(projectileOrRend.name, projectileOrRendSpawn.position, Quaternion.identity);
+
             tempObj.GetComponent<RangedProjectile>().Obj = Target;
             tempObj.GetComponent<RangedProjectile>().EnemieTeam = OtherTeamTag;
             tempObj.GetComponent<RangedProjectile>().Damage = Damage;
             tempObj.tag = tag;
             if (!Attacking)
             {
-                Destroy(tempObj);
+                PhotonNetwork.Destroy(tempObj);
             }
         }
 
@@ -70,10 +64,30 @@ public class UnitAttack : MonoBehaviour
 
     private void AttackScan()
     {
-        Target.GetComponent<HealthScript>().TakeDamage(Damage);
-        GameObject tmpObj = Instantiate(projectileOrRend, transform.position, Quaternion.identity);
-        Vector3[] points = { projectileOrRendSpawn.position, Target.transform.position };
-        tmpObj.GetComponent<LineRenderer>().SetPositions(points);
-        Destroy(tmpObj, 0.5f);
+        TargetView = Target.GetComponent<PhotonView>();
+        TargetView.RPC("TakeDamage", TargetView.Controller, Damage);            //send rpc call that damages the other dude
+
+        GameObject tmpObj = PhotonNetwork.Instantiate(projectileOrRend.name, transform.position, Quaternion.identity);
+
+        GetComponent<PhotonView>().RPC("SetPoints", RpcTarget.AllBuffered, projectileOrRendSpawn.position, Target.transform.position, tmpObj.GetComponent<PhotonView>().ViewID);
+        StartCoroutine(SelfDestruct(tmpObj, 0.5f));
+    }
+    
+    [PunRPC]
+    private void SetPoints(Vector3 p1, Vector3 p2, int ID)
+    {
+        Vector3[] points = { p1, p2 };
+        PhotonNetwork.GetPhotonView(ID).GetComponent<LineRenderer>().SetPositions(points);
+
+    }
+
+
+     
+    private IEnumerator SelfDestruct(GameObject obj, float delay)
+    {
+
+        yield return new WaitForSeconds(delay);
+
+        PhotonNetwork.Destroy(obj);
     }
 }

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 using UnityEngine.AI;
 
 public class UnitPathfinding : MonoBehaviour
 {
 
     public NavMeshAgent agent;
-    private Transform Target;
+    public LayerMask Targetable;
 
     private bool isAttacking = false;
 
@@ -20,90 +21,98 @@ public class UnitPathfinding : MonoBehaviour
     private Collider[] hits;
     private string OtherTeamTag;
     private float closestDistance;
-    private GameObject ClosestObj;
+    private GameObject TargetObj;
 
     public UnitAttack AttackScript;
     public HealthScript HealthScript;
+
+    private PhotonView view;
     // Start is called before the first frame update
 
 
     private void Start()
     {
-        closestDistance = sightRange;
-
-        agent.stoppingDistance = AttackRange;
-
-        if(tag == "Team1")
+        view = GetComponent<PhotonView>();
+        if (view.IsMine)
         {
-            OtherTeamTag = "Team2";
-        }
-        else if(tag == "Team2")
-        {
-            OtherTeamTag = "Team1";
+            agent.stoppingDistance = AttackRange - 0.5f;
+
+            if (tag.Equals("Team1"))
+            {
+                OtherTeamTag = "Team2";
+            }
+            else if (tag.Equals("Team2"))
+            {
+                OtherTeamTag = "Team1";
+            }
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!isAttacking || !Target)   
+        if (view.IsMine)
         {
-            hits = Physics.OverlapSphere(transform.position, closestDistance);
-            foreach (Collider hit in hits)
+            if (!TargetObj)
             {
-                if (hit.tag == OtherTeamTag)
+                TargetObj = FindTarget();
+
+                if (isAttacking)
                 {
-                    float d = Vector3.Distance(transform.position, hit.transform.position);
-                    if (d < closestDistance)
+                    isAttacking = false;
+                    AttackScript.StopAttack();
+                }
+            }
+
+            if (TargetObj)
+            {
+                closestDistance = Vector3.Distance(transform.position, TargetObj.transform.position);
+                if (closestDistance > sightRange)
+                {
+                    TargetObj = null;
+                    if (isAttacking)
                     {
-                        ClosestObj = hit.gameObject;
-                        closestDistance = d;
+                        isAttacking = false;
+                        AttackScript.StopAttack();
                     }
                 }
-            }
-            if (ClosestObj) { closestDistance = Vector3.Distance(transform.position, ClosestObj.transform.position); }
-        }
-        
-        if (ClosestObj)
-        {
-
-            if(Vector3.Distance(transform.position, ClosestObj.transform.position) <= AttackRange && !isAttacking)
-            {
-                isAttacking = true;
-                if (isHitscan)
+                else if(closestDistance < sightRange)
                 {
-                    AttackScript.StartAttackScan(ClosestObj);
+                    agent.SetDestination(TargetObj.transform.position);
                 }
-                else
+
+                if(closestDistance > AttackRange && isAttacking)
                 {
-                    AttackScript.StartAttackProj(ClosestObj, OtherTeamTag);
+                    isAttacking = false;
+                    AttackScript.StopAttack();
+                }
+                else if (closestDistance <= AttackRange && !isAttacking)
+                {
+                    print("start");
+                    isAttacking = true;
+                    AttackScript.StartAttackProj(TargetObj, OtherTeamTag);
                 }
             }
-
-            if(Vector3.Distance(transform.position, ClosestObj.transform.position) > AttackRange && isAttacking)
-            {
-                isAttacking = false;
-                closestDistance = sightRange;
-                AttackScript.StopAttack();
-            }
-            if (!isAttacking)
-            {
-                agent.SetDestination(ClosestObj.transform.position);
-            }
         }
-        else if(isAttacking)
-        {
-            isAttacking = false;
-            AttackScript.StopAttack();
-        }
-        if (!ClosestObj) { closestDistance = sightRange; }
     }
 
-    private void OnDrawGizmos()
+    private GameObject FindTarget()
     {
-        Gizmos.color = new Color(255, 0, 0);
-        Gizmos.DrawWireSphere(transform.position, closestDistance);
-        Gizmos.color = new Color(255, 0, 255);
-        Gizmos.DrawWireSphere(transform.position, agent.stoppingDistance);
-    }
+        GameObject Tmp = null;
+        hits = Physics.OverlapSphere(transform.position, sightRange, Targetable);
+        closestDistance = sightRange;
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag(OtherTeamTag))
+            {
+                float d = Vector3.Distance(transform.position, hit.transform.position);
+                if (d < closestDistance)
+                {
+                    closestDistance = d;
+                    Tmp = hit.gameObject;
+                }
+            }
+        }
+        return Tmp;
+    } //returns closest valid target in sightrange or null if there are none
 }

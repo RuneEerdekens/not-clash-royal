@@ -42,6 +42,9 @@ MonoBehaviour:
   - SetTag
   - setTag
   - SetTeamTag
+  - UpdateHealthbar
+  - TakeDamage
+  - SetPoints
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
