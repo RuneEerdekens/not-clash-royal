@@ -47,7 +47,7 @@ public class HealthScript : MonoBehaviour
         Healthbar.fillRect.gameObject.GetComponent<Image>().color = HealthGradient.Evaluate(CurrHP / maxHP);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         Destroy(Instantiate(DeathEffect, transform.position, Quaternion.identity), 5f);
     }

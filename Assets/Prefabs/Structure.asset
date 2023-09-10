@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a3a70d615bb9748b6a33c0a05f3abf, type: 3}
   m_Name: Structure
   m_EditorClassIdentifier: 
-  ObjectHull: {fileID: 5479467402170895930, guid: c29df50757a7f8b4299d4927bbaca727,
+  ObjectHull: {fileID: 1448992668091495065, guid: 40aa66089a0506e499a4401080d09dd4,
     type: 3}
-  Object: {fileID: 7179348619688362632, guid: 1fd8058cd22819b43b68601a25c31779, type: 3}
+  Object: {fileID: 7156034551555535949, guid: 32a2c975693e72b4a842918016563db0, type: 3}
   Cost: 10

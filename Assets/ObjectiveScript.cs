@@ -1,36 +1,19 @@
-using TMPro;
 using UnityEngine;
 using Photon.Pun;
 
 public class ObjectiveScript : MonoBehaviour
 {
-    private PhotonView view;
-    public GameObject GameEndText;
+    [HideInInspector]
+    public PhotonView PlayerView;
 
-    private void Start()
+    private void OnDisable()
     {
-        view = GetComponent<PhotonView>();
-    }
-
-    private void OnDestroy()
-    {
-        if (view.IsMine)
+        if (PlayerView)
         {
-            view.RPC("TeamLost", RpcTarget.AllBuffered, tag);
-        }
-    }
-
-    [PunRPC]
-    private void TeamLost(string lossTag)
-    {
-        GameObject tmp = Instantiate(GameEndText, Vector3.up * 10, Quaternion.identity);
-        if (lossTag == tag)
-        {
-            tmp.GetComponent<TextMeshPro>().text = "You lost.";
-        }
-        else if(lossTag != tag)
-        {
-            tmp.GetComponent<TextMeshPro>().text = "You won.";
+            if (PlayerView.IsMine)
+            {
+                PlayerView.RPC("TeamLost", RpcTarget.AllBuffered, tag);
+            }
         }
     }
 }

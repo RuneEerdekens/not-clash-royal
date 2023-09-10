@@ -23,6 +23,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
             view = Player.GetComponent<PhotonView>();
             view.RPC("SetTeamTag", RpcTarget.AllBuffered, "Team1");
             GameObject objectiveObj = PhotonNetwork.Instantiate(Objective.name, SpawnP1.position + new Vector3(0, 0.5f, -3), SpawnP1.rotation);
+            objectiveObj.GetComponent<ObjectiveScript>().PlayerView = PlayerPrefab.GetComponent<PhotonView>();
             view = objectiveObj.GetComponent<PhotonView>();
             view.RPC("SetTeamTag", RpcTarget.AllBuffered, "Team1");
         }
@@ -33,6 +34,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
             view = Player.GetComponent<PhotonView>();
             view.RPC("SetTeamTag", RpcTarget.AllBuffered, "Team2");
             GameObject objectiveObj = PhotonNetwork.Instantiate(Objective.name, SpawnP2.position + new Vector3(0, 0.5f, 3), SpawnP1.rotation);
+            objectiveObj.GetComponent<ObjectiveScript>().PlayerView = PlayerPrefab.GetComponent<PhotonView>();
             view = objectiveObj.GetComponent<PhotonView>();
             view.RPC("SetTeamTag", RpcTarget.AllBuffered, "Team2");
         }

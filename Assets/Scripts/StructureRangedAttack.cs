@@ -9,10 +9,10 @@ public class StructureRangedAttack : MonoBehaviour
     private string OtherTeamTag;
     private float closestDistance;
     private Collider[] hits;
-    private GameObject TargetObj;
+    public GameObject TargetObj;
     public LayerMask Targetable;
 
-    public UnitAttack AttackScript;
+    public hitScanAttack AttackScript;
     private PhotonView view;
 
 
@@ -59,7 +59,7 @@ public class StructureRangedAttack : MonoBehaviour
                 if(closestDistance <= Range && !isAttacking)
                 {
                     isAttacking = true;
-                    AttackScript.StartAttackScan(TargetObj);
+                    AttackScript.StartAttack(TargetObj);
                 }
             }
         }

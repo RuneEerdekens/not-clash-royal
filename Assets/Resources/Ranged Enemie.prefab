@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3121e9d7fce60f24d95763e49a5f19e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &5897892420907515735
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,12 +418,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb48f8074cc50e4682c73d58f8032bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
   Damage: 10
-  projectileOrRendSpawn: {fileID: 5897892420907515736}
+  projectileSpawn: {fileID: 0}
   Attacking: 0
   isRanged: 1
-  projectileOrRend: {fileID: 5961371784289558747, guid: 62425bedc6277944ba385cfa2c813fb1,
-    type: 3}
+  projectile: {fileID: 0}
   AttackSpeed: 2
   Anim: {fileID: 5897892420907515742}
 --- !u!114 &5346208318219222630

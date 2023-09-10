@@ -43,7 +43,7 @@ public class PlaceUnit : MonoBehaviourPunCallbacks
         if(Physics.Raycast(RightController.transform.position, RightController.transform.forward, out hit, 1000f) && ManaMangerScript.CurrMana > obj.Cost)
         {
             if(hit.collider.tag == "Placable"){
-                GameObject tmp = PhotonNetwork.Instantiate(Unit.name, hit.point + new Vector3(0, Unit.transform.localScale.y / 2, 0), Quaternion.identity);
+                GameObject tmp = PhotonNetwork.Instantiate(Unit.name, hit.point, Quaternion.identity);
                 tmp.GetComponent<PhotonView>().RPC("SetTeamTag", RpcTarget.AllBuffered, tag); // set tag of new object to right team
                 ManaMangerScript.RemoveMana(obj.Cost);
             }
@@ -58,7 +58,7 @@ public class PlaceUnit : MonoBehaviourPunCallbacks
         {
             if(hit2.collider.tag != "noDisplay")
             {
-                SelectedObj.transform.position = hit2.point + new Vector3(0, SelectedObj.transform.localScale.y / 2, 0);
+                SelectedObj.transform.position = hit2.point;
             } 
             else if(hit2.collider.tag == "noDisplay")
             {
