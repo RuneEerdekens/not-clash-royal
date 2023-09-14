@@ -10,6 +10,8 @@ public class UnitPathfinding : MonoBehaviour
     public NavMeshAgent agent;
     public LayerMask Targetable;
 
+    public Vector3 rotOffset;
+
     private bool isAttacking = false;
 
     public bool isRanged;
@@ -23,7 +25,8 @@ public class UnitPathfinding : MonoBehaviour
     private float closestDistance;
     private GameObject TargetObj;
 
-    public UnitAttack AttackScript;
+    public UnitAttack ProjAttackScript;
+    public hitScanAttack hitScanAttackScript;
     public HealthScript HealthScript;
 
     private PhotonView view;
@@ -60,12 +63,14 @@ public class UnitPathfinding : MonoBehaviour
                 if (isAttacking)
                 {
                     isAttacking = false;
-                    AttackScript.StopAttack();
+                    CallStopAttack();
                 }
             }
 
             if (TargetObj)
             {
+                transform.LookAt(new Vector3(TargetObj.transform.position.x, transform.position.y, TargetObj.transform.position.z));
+                transform.Rotate(rotOffset);
                 closestDistance = Vector3.Distance(transform.position, TargetObj.transform.position);
                 if (closestDistance > sightRange)
                 {
@@ -73,7 +78,7 @@ public class UnitPathfinding : MonoBehaviour
                     if (isAttacking)
                     {
                         isAttacking = false;
-                        AttackScript.StopAttack();
+                        CallStopAttack();
                     }
                 }
                 else if(closestDistance < sightRange)
@@ -84,15 +89,39 @@ public class UnitPathfinding : MonoBehaviour
                 if(closestDistance > AttackRange && isAttacking)
                 {
                     isAttacking = false;
-                    AttackScript.StopAttack();
+                    CallStopAttack();
                 }
                 else if (closestDistance <= AttackRange && !isAttacking)
                 {
                     print("start");
                     isAttacking = true;
-                    AttackScript.StartAttackProj(TargetObj, OtherTeamTag);
+                    CallStartAttack(TargetObj, OtherTeamTag);
                 }
             }
+        }
+    }
+
+    private void CallStartAttack(GameObject Obj, string tag)
+    {
+        if (ProjAttackScript)
+        {
+            ProjAttackScript.StartAttackProj(Obj, tag);
+        }
+        else
+        {
+            hitScanAttackScript.StartAttack(Obj);
+        }
+    }
+
+    private void CallStopAttack()
+    {
+        if (ProjAttackScript)
+        {
+            ProjAttackScript.StopAttack();
+        }
+        else
+        {
+            hitScanAttackScript.StopAttack();
         }
     }
 

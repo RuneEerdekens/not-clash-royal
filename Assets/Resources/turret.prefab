@@ -608,7 +608,7 @@ MonoBehaviour:
   Attacking: 0
   EffectSpawn: {fileID: 871884513838910722}
   Effect: {fileID: 2392845200608852339, guid: 6a4815887f7b0384794873769f0e9335, type: 3}
-  Damage: 50
+  Damage: 20
   AttackSpeed: 2
 --- !u!65 &5433786433879741836
 BoxCollider:

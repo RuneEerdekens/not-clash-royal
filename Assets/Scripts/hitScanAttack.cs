@@ -6,6 +6,7 @@ using Photon.Pun;
 public class hitScanAttack : MonoBehaviour
 {
     
+    [HideInInspector]
     public GameObject Target;
 
     [HideInInspector]
